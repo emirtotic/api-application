@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+                                  http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="CountryReport"
+              pageWidth="595"
+              pageHeight="842"
+              columnWidth="555"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="20"
+              bottomMargin="20">
+
+    <property name="ireport.zoom" value="1.0"/>
+
+    <parameter name="countryReport" class="com.covidtracker.entity.CountryReport" isForPrompting="false"/>
+
+    <queryString>
+        <![CDATA[SELECT * FROM dual]]>
+    </queryString>
+
+    <field name="title" class="java.lang.String"/>
+    <field name="description" class="java.lang.String"/>
+    <field name="code" class="java.lang.String"/>
+    <field name="country" class="java.lang.String"/>
+    <field name="confirmed" class="java.lang.Integer"/>
+    <field name="recovered" class="java.lang.Integer"/>
+    <field name="critical" class="java.lang.Integer"/>
+    <field name="deaths" class="java.lang.Integer"/>
+    <field name="lastChange" class="java.util.Date"/>
+    <field name="lastUpdate" class="java.util.Date"/>
+
+    <title>
+        <band height="60">
+            <textField>
+                <reportElement x="0" y="0" width="555" height="30"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$P{countryReport}.getTitle()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="30" width="555" height="30"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$P{countryReport}.getDescription()]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <detail>
+        <band height="160">
+            <textField>
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textFieldExpression><![CDATA["Country: " + $P{countryReport}.getCountry()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="20" width="555" height="20"/>
+                <textFieldExpression><![CDATA["Code: " + $P{countryReport}.getCode()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="40" width="555" height="20"/>
+                <textFieldExpression><![CDATA["Confirmed Cases: " + $P{countryReport}.getConfirmed()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="60" width="555" height="20"/>
+                <textFieldExpression><![CDATA["Recovered Cases: " + $P{countryReport}.getRecovered()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="80" width="555" height="20"/>
+                <textFieldExpression><![CDATA["Critical Cases: " + $P{countryReport}.getCritical()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="100" width="555" height="20"/>
+                <textFieldExpression><![CDATA["Deaths: " + $P{countryReport}.getDeaths()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="120" width="555" height="20"/>
+                <textFieldExpression><![CDATA["Last Change: " + $P{countryReport}.getLastChange()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="140" width="555" height="20"/>
+                <textFieldExpression><![CDATA["Last Update: " + $P{countryReport}.getLastUpdate()]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <summary>
+        <band height="20">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[End of Report]]></text>
+            </staticText>
+        </band>
+    </summary>
+
+    <noData>
+        <band height="100">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="100"/>
+                <text><![CDATA[No data available for the selected country.]]></text>
+            </staticText>
+        </band>
+    </noData>
+
+</jasperReport>

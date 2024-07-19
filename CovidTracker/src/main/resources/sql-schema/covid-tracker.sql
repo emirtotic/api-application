@@ -1,0 +1,94 @@
+CREATE DATABASE  IF NOT EXISTS `covid-tracker` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `covid-tracker`;
+-- MySQL dump 10.13  Distrib 8.0.36, for macos14 (x86_64)
+--
+-- Host: localhost    Database: covid-tracker
+-- ------------------------------------------------------
+-- Server version	8.0.29
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `covid_record`
+--
+
+DROP TABLE IF EXISTS `covid_record`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `covid_record` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `code` varchar(6) NOT NULL,
+  `country` varchar(25) NOT NULL,
+  `confirmed` bigint NOT NULL,
+  `recovered` bigint NOT NULL,
+  `critical` bigint NOT NULL,
+  `deaths` bigint NOT NULL,
+  `last_change` datetime NOT NULL,
+  `last_update` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `covid_record`
+--
+
+LOCK TABLES `covid_record` WRITE;
+/*!40000 ALTER TABLE `covid_record` DISABLE KEYS */;
+INSERT INTO `covid_record` VALUES (9,'IT','Italy',26723249,26361218,22,196487,'2024-06-04 02:25:34','2024-06-17 01:57:28'),(10,'FR','France',40138560,39970918,0,167642,'2024-02-11 23:10:37','2024-06-17 01:57:28'),(11,'US','USA',111820082,109814428,940,1219487,'2024-06-04 02:17:41','2024-06-17 01:57:28'),(13,'HR','Croatia',1309728,1258432,0,18687,'2024-06-04 02:27:44','2024-06-17 01:57:28'),(14,'SL','Sierra Leone',7779,1847,0,126,'2024-06-04 02:16:02','2024-06-17 01:57:28'),(15,'MK','North Macedonia',350567,337068,0,9976,'2024-06-04 02:16:06','2024-06-17 01:57:28'),(16,'CA','Canada',4946090,4881312,99,59034,'2024-06-04 02:25:39','2024-06-17 01:57:28'),(17,'ES','Spain',13914811,13762417,231,121760,'2024-06-04 02:21:38','2024-06-17 01:57:28'),(18,'PL','Poland',6661991,768241,0,120598,'2024-06-04 02:19:09','2024-06-17 01:57:28'),(19,'SV','El Salvador',201855,179410,0,4230,'2024-06-04 02:23:12','2024-06-17 01:57:28'),(20,'CM','Cameroon',125379,123280,0,1974,'2024-06-04 02:27:02','2024-06-17 01:57:28'),(21,'KR','S. Korea',34571873,34535939,0,35934,'2024-02-11 23:15:03','2024-06-17 01:57:28'),(22,'FI','Finland',1516117,1503989,0,11958,'2024-06-04 02:26:44','2024-06-17 01:57:28'),(23,'NO','Norway',1509732,1503094,0,6638,'2024-06-04 02:27:11','2024-06-17 01:57:28'),(24,'SE','Sweden',2754129,2726492,0,27407,'2024-06-04 02:18:21','2024-06-17 01:57:28'),(25,'AU','Australia',11853144,11820014,3,24414,'2024-06-04 02:23:47','2024-06-17 01:57:28'),(26,'AR','Argentina',10128845,9997258,0,130841,'2024-06-04 02:25:08','2024-06-17 01:57:28'),(27,'BY','Belarus',994037,985592,0,7118,'2024-02-11 23:05:12','2024-06-17 01:57:28'),(28,'BA','Bosnia and Herzegovina',403615,379084,0,16388,'2024-06-04 02:20:59','2024-06-17 01:57:28'),(29,'BR','Brazil',38743918,36249161,0,711380,'2024-06-04 02:26:42','2024-06-17 01:57:28'),(30,'BG','Bulgaria',1339851,1292944,22,38748,'2024-06-04 02:22:43','2024-06-17 01:57:28'),(31,'CN','China',503302,379053,0,5272,'2024-02-11 23:13:58','2024-06-17 01:57:28'),(32,'CZ','Czechia',4759041,4715206,2,43517,'2024-06-04 02:18:00','2024-06-17 01:57:28'),(33,'EG','Egypt',516023,442182,122,24801,'2024-02-11 23:10:02','2024-06-17 01:57:28'),(34,'DE','Germany',38828995,38240600,0,183027,'2024-06-04 02:23:42','2024-06-17 01:57:28'),(35,'GR','Greece',6101379,6064290,0,37869,'2024-06-04 02:26:50','2024-06-17 01:57:28'),(36,'GB','UK',24910387,24678275,0,232112,'2024-06-04 02:20:15','2024-06-17 01:57:28'),(37,'HU','Hungary',2230232,2152155,0,49048,'2024-06-04 02:25:53','2024-06-17 01:57:28'),(38,'JP','Japan',33803572,140622,0,74694,'2024-02-11 23:02:40','2024-06-17 01:57:28'),(39,'ME','Montenegro',296542,291794,0,2846,'2024-06-04 02:19:13','2024-06-17 01:57:28'),(40,'NL','Netherlands',8635786,8612599,0,22992,'2024-06-04 02:21:30','2024-06-17 01:57:28'),(41,'NZ','New Zealand',2621111,2613791,0,5697,'2024-06-04 02:23:05','2024-06-17 01:57:28'),(42,'PT','Portugal',5643062,5614809,61,28126,'2024-06-04 02:25:39','2024-06-17 01:57:28'),(43,'CH','Switzerland',4453053,4438309,0,14452,'2024-06-04 02:22:21','2024-06-17 01:57:28'),(44,'TR','Turkey',17232066,447361,0,102174,'2024-02-11 23:02:17','2024-06-17 01:57:28'),(45,'AL','Albania',334863,330233,0,3605,'2024-06-04 02:27:05','2024-06-17 01:57:28'),(48,'RS','Serbia',2615054,2596608,0,18057,'2024-06-04 02:20:41','2024-06-17 01:57:28');
+/*!40000 ALTER TABLE `covid_record` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `flyway_schema_history`
+--
+
+DROP TABLE IF EXISTS `flyway_schema_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `flyway_schema_history` (
+  `installed_rank` int NOT NULL,
+  `version` varchar(50) DEFAULT NULL,
+  `description` varchar(200) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `script` varchar(1000) NOT NULL,
+  `checksum` int DEFAULT NULL,
+  `installed_by` varchar(100) NOT NULL,
+  `installed_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `execution_time` int NOT NULL,
+  `success` tinyint(1) NOT NULL,
+  PRIMARY KEY (`installed_rank`),
+  KEY `flyway_schema_history_s_idx` (`success`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `flyway_schema_history`
+--
+
+LOCK TABLES `flyway_schema_history` WRITE;
+/*!40000 ALTER TABLE `flyway_schema_history` DISABLE KEYS */;
+INSERT INTO `flyway_schema_history` VALUES (1,'0.1.0001','CreateTableCovidRecord','SQL','V0.1_0001__CreateTableCovidRecord.sql',1435387149,'root','2024-07-06 14:52:18',14,1);
+/*!40000 ALTER TABLE `flyway_schema_history` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-07-07 17:23:33

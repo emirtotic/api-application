@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: covid_tracker_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: covid-tracker
+    ports:
+      - "3306:3306"
+    volumes:
+      - covid_tracker_db_data:/var/lib/mysql
+
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: covid_tracker_app
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/covid-tracker?allowPublicKeyRetrieval=true&useSSL=False
+#      SPRING_DATASOURCE_USERNAME: root
+#      SPRING_DATASOURCE_PASSWORD: 12345678
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: covid_tracker_app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/covid-tracker?allowPublicKeyRetrieval=true&useSSL=False
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345678
+      SPRING_FLYWAY_URL: jdbc:mysql://mysql:3306/covid-tracker?allowPublicKeyRetrieval=true&useSSL=False
+      SPRING_FLYWAY_USER: root
+      SPRING_FLYWAY_PASSWORD: 12345678
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+
+volumes:
+  covid_tracker_db_data:
