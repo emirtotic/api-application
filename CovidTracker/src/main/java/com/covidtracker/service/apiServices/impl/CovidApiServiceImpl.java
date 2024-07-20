@@ -3,6 +3,8 @@ package com.covidtracker.service.apiServices.impl;
 import com.covidtracker.dto.covid.CovidApiResponse;
 import com.covidtracker.entity.CovidRecord;
 import com.covidtracker.exception.CovidRecordNotFoundException;
+import com.covidtracker.kafka.CovidRecordForSending;
+import com.covidtracker.kafka.MessageProducer;
 import com.covidtracker.mapper.CovidMapper;
 import com.covidtracker.repository.CovidDbRepository;
 import com.covidtracker.service.apiServices.CovidApiService;
@@ -37,6 +39,9 @@ public class CovidApiServiceImpl implements CovidApiService {
     @Autowired
     private CovidMapper covidMapper;
 
+    @Autowired
+    private MessageProducer messageProducer;
+
     @Value("${rapidApiUrl}")
     private String rapidApiUrl;
     @Value("${x-rapidapi-key}")
@@ -69,9 +74,15 @@ public class CovidApiServiceImpl implements CovidApiService {
             if (retrievedRecord.isPresent()) {
                 assembleRecord(covidApiResponse, retrievedRecord);
                 covidDbService.saveCovidData(retrievedRecord.get());
+
+                CovidRecordForSending covidRecord = setRecordForSending(retrievedRecord.get());
+
+                messageProducer.sendMessage("covid", covidRecord);
             } else {
                 CovidRecord covidRecord = covidMapper.mapFromApiResponseToDbEntity(covidApiResponse.get(0));
                 covidDbService.saveCovidData(covidRecord);
+                CovidRecordForSending covidRecordForSending = setRecordForSending(covidRecord);
+                messageProducer.sendMessage("covid", covidRecordForSending);
             }
 
             return covidApiResponse;
@@ -82,6 +93,21 @@ public class CovidApiServiceImpl implements CovidApiService {
                     e.getMessage());
         }
 
+    }
+
+    private CovidRecordForSending setRecordForSending(CovidRecord record) {
+        CovidRecordForSending covidRecord = new CovidRecordForSending();
+        covidRecord.setId(record.getId().toString());
+        covidRecord.setCountry(record.getCountry());
+        covidRecord.setCode(record.getCode());
+        covidRecord.setConfirmed(record.getConfirmed());
+        covidRecord.setRecovered(record.getRecovered());
+        covidRecord.setCritical(record.getCritical());
+        covidRecord.setDeaths(record.getDeaths());
+        covidRecord.setLastChange(record.getLastChange());
+        covidRecord.setLastUpdate(record.getLastUpdate());
+
+        return covidRecord;
     }
 
     private CovidRecord assembleRecord(List<CovidApiResponse> covidApiResponse,
