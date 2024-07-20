@@ -28,6 +28,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class CovidApiServiceImpl implements CovidApiService {
+
     @Autowired
     private CovidDbRepository covidDbRepository;
 
