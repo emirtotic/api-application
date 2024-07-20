@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.common.KafkaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -74,15 +75,25 @@ public class CovidApiServiceImpl implements CovidApiService {
             if (retrievedRecord.isPresent()) {
                 assembleRecord(covidApiResponse, retrievedRecord);
                 covidDbService.saveCovidData(retrievedRecord.get());
-
                 CovidRecordForSending covidRecord = setRecordForSending(retrievedRecord.get());
 
-                messageProducer.sendMessage("covid", covidRecord);
+                try {
+                    messageProducer.sendMessage("covid", covidRecord);
+                } catch(KafkaException e) {
+                    // Log the exception, you may also want to retry sending message or handle exception in a way that you see fit
+                    log.error("Failed to send message to Kafka", e);
+                }
             } else {
                 CovidRecord covidRecord = covidMapper.mapFromApiResponseToDbEntity(covidApiResponse.get(0));
                 covidDbService.saveCovidData(covidRecord);
                 CovidRecordForSending covidRecordForSending = setRecordForSending(covidRecord);
-                messageProducer.sendMessage("covid", covidRecordForSending);
+
+                try {
+                    messageProducer.sendMessage("covid", covidRecordForSending);
+                } catch(KafkaException e) {
+                    // Log the exception, you may also want to retry sending message or handle exception in a way that you see fit
+                    log.error("Failed to send message to Kafka", e);
+                }
             }
 
             return covidApiResponse;
