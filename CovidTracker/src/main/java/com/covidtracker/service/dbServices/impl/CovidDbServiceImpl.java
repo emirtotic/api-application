@@ -5,7 +5,6 @@ import com.covidtracker.entity.CovidRecord;
 import com.covidtracker.exception.CovidRecordNotFoundException;
 import com.covidtracker.mapper.CovidMapper;
 import com.covidtracker.repository.CovidDbRepository;
-import com.covidtracker.service.MailSenderService;
 import com.covidtracker.service.dbServices.CovidDbService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,7 @@ public class CovidDbServiceImpl implements CovidDbService {
 
     private final CovidMapper covidMapper;
 
-    private final MailSenderService mailSenderService;
+    private final MailSenderServiceImpl mailSenderService;
 
     @Override
     public List<CovidRecordDto> findAllRecords() {
