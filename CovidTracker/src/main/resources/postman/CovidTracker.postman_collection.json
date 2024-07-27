@@ -7,6 +7,37 @@
 	},
 	"item": [
 		{
+			"name": "Countries",
+			"item": [
+				{
+					"name": "GetCountryData",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/country/data?countryName=italy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"country",
+								"data"
+							],
+							"query": [
+								{
+									"key": "countryName",
+									"value": "italy"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "GetDataFromApiByCountryCode",
 			"request": {
 				"auth": {
@@ -15,7 +46,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/covid/get-all-data/rs",
+					"raw": "http://localhost:8080/covid/get-all-data/it",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -24,7 +55,7 @@
 					"path": [
 						"covid",
 						"get-all-data",
-						"rs"
+						"it"
 					]
 				}
 			},
@@ -266,7 +297,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/covid-report/pdf/it",
+					"raw": "http://localhost:8080/api/v1/covid-report/pdf/rs",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -277,7 +308,7 @@
 						"v1",
 						"covid-report",
 						"pdf",
-						"it"
+						"rs"
 					]
 				}
 			},
@@ -331,6 +362,34 @@
 						"country",
 						"code",
 						"rs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SendAnEmailForCountryWithReport",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/covid-results/country/code/it/emir@test.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"covid-results",
+						"country",
+						"code",
+						"it",
+						"emir@test.com"
 					]
 				}
 			},
