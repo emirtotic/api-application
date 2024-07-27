@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,4 +26,20 @@ public class CovidRecordDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy:HH:mm:ss")
     private LocalDateTime lastUpdate;
 
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Country: ").append(country)
+                .append("\nCountry code: ").append(code)
+                .append("\nConfirmed: ").append(confirmed)
+                .append("\nRecovered: ").append(recovered)
+                .append("\nCritical: ").append(critical)
+                .append("\nDeaths: ").append(deaths)
+                .append("\nLast Change: ").append(lastChange)
+                .append("\nLast Update: ").append(lastUpdate);
+
+        return sb.toString();
+    }
 }

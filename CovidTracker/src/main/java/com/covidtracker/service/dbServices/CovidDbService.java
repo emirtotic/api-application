@@ -16,5 +16,5 @@ public interface CovidDbService {
     List<CovidRecordDto> findAllRecordsFromBalkan();
     Page<CovidRecordDto> findAllRecords(Pageable pageable);
     CovidRecordDto findAllRecordsForCountryByName(String countryName);
-
+    CovidRecordDto sendAnEmailWithReport(String countryCode, String email);
 }

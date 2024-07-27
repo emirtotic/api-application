@@ -4,6 +4,7 @@ import com.covidtracker.dto.covid.CovidRecordDto;
 import com.covidtracker.entity.CovidRecord;
 import com.covidtracker.mapper.CovidMapper;
 import com.covidtracker.repository.CovidDbRepository;
+import com.covidtracker.service.MailSenderService;
 import com.covidtracker.service.dbServices.CovidDbService;
 import com.covidtracker.service.dbServices.impl.CovidDbServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,12 +22,13 @@ class CovidDbServiceImplTest {
     private CovidDbRepository covidDbRepository;
     private CovidMapper covidMapper;
     private CovidDbService covidDbService;
+    private MailSenderService mailSenderService;
 
     @BeforeEach
     void setUp() {
         covidDbRepository = mock(CovidDbRepository.class);
         covidMapper = mock(CovidMapper.class);
-        covidDbService = new CovidDbServiceImpl(covidDbRepository, covidMapper);
+        covidDbService = new CovidDbServiceImpl(covidDbRepository, covidMapper, mailSenderService );
 
     }
 

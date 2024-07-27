@@ -53,4 +53,10 @@ public class CovidDbController {
         return new ResponseEntity<>(covidDbService.findAllRecordsForCountryByName(countryName), HttpStatus.OK);
     }
 
+    @GetMapping("/country/code/{countryCode}/{email}")
+    public ResponseEntity<CovidRecordDto> sendAnEmailWithReport(@PathVariable(name = "countryCode") String countryCode,
+                                                                @PathVariable(name = "email") String email) {
+        return new ResponseEntity<>(covidDbService.sendAnEmailWithReport(countryCode, email), HttpStatus.OK);
+    }
+
 }
