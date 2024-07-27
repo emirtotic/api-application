@@ -34,7 +34,6 @@ public class CovidDbServiceImpl implements CovidDbService {
     @Override
     public CovidRecordDto findAllRecordsForCountry(String countryCode) {
         log.info("Fetching covid data for [{}]...", countryCode);
-        mailSenderService.sendNewMail("emirtotic@gmail.com", "TEST", "Proba!");
         return covidMapper.mapToDto(covidDbRepository.findAllRecordsForCountry(countryCode));
     }
 
