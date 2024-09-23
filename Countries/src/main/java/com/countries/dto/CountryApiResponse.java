@@ -25,6 +25,4 @@ public class CountryApiResponse {
     private String populationDensitySqMi;
     private String populationDensityKm2;
     private List<String> neighborsList;
-
-
 }
